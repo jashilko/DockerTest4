@@ -9,7 +9,6 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,6 +22,4 @@ jobs:
             cd ${{ secrets.PROJECT_FOLDER }};
             git checkout main;
             git pull;
-            docker-compose --file docker-compose.prod.yml down;
-            docker-compose --file docker-compose.prod.yml up -d;
-            docker system prune --all --force;
+            docker-compose up
