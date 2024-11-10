@@ -1,25 +1,22 @@
 name: "DockerTest4"
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   pull_request:
-    branches: ["master"]
+    branches: ["main"]
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Run command on remote server
-        uses: D3rHase/ssh-command-action@v0.2.2
+      - name: Deploy using ssh # Название шага: Деплой с использованием SSH
+        uses: appleboy/ssh-action@master # Использование готового действия для SSH-подключения
         with:
           host: ${{secrets.SSH_HOST}}
           user: ${{secrets.SSH_USER}}
-          private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          command: |
-            cd ${{ secrets.PROJECT_FOLDER }};
-            git checkout main;
-            git pull;
-            docker-compose up
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          port: 22 # Порт для SSH-подключения (по умолчанию 22)
+          script: |
+            cd /home/docker-test3/ # Переход в директорию с проектом на сервере
+            git pull origin main # Вытягивание последних изменений из ветки main
+            git status # Проверка состояния git-репозитория
