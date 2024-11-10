@@ -13,7 +13,7 @@ jobs:
         uses: appleboy/ssh-action@master # Использование готового действия для SSH-подключения
         with:
           host: ${{secrets.SSH_HOST}}
-          user: ${{secrets.SSH_USER}}
+          username: ${{secrets.SSH_USER}}
           key: ${{secrets.SSH_PRIVATE_KEY}}
           port: 22 # Порт для SSH-подключения (по умолчанию 22)
           script: |
