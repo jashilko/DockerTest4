@@ -7,7 +7,7 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      - db1
 
   db1:
     image: postgres:13
