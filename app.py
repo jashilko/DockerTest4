@@ -13,7 +13,7 @@ def hello_world():
         dbname="mydatabase",
         user="user",
         password="password",
-        host="db"
+        host="db1"
     )
     cur = conn.cursor()
     cur.execute("SELECT version();")
